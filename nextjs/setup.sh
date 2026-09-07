@@ -3,6 +3,10 @@
 set -Eeuo pipefail
 
 : <<'NEUP_DOCUMENTATION'
+
+:: Where to keep this file?
+:: Keep this inside the /.neup folder as setup.sh
+
 ::neup.documentation::setup-script
 
 Synchronizes the shared Neup repositories into the expected `.neup` folders.
