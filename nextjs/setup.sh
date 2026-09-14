@@ -75,7 +75,7 @@ repositories=(
   "https://github.com/neupgroup/neup.core|$NEUP_DIR/core|neup.core"
   "https://github.com/neupgroup/neup.logica|$NEUP_DIR/logica|neup.logica"
   "https://github.com/neupgroup/neup.react.components|$NEUP_DIR/components|neup.react.components"
-  "https://github.com/neupgroup/devdomain.setup|$NEUP_DIR/devDomain|devdomain.setup"
+  "https://github.com/neupgroup/devdomain.setup|$NEUP_DIR/core/domain|devdomain.setup"
 )
 
 for repository in "${repositories[@]}"; do
