@@ -71,6 +71,16 @@ done
 
 mkdir -p -- "$NEUP_DIR"
 
+env_script="$SCRIPT_DIR/generation/env.sh"
+if [[ ! -f "$env_script" ]]; then
+  mkdir -p -- "$SCRIPT_DIR/generation"
+  printf 'Downloading generation/env.sh.\n'
+  curl --fail --silent --show-error --location \
+    "https://raw.githubusercontent.com/neupgroup/guidelines/main/nextjs/generation/env.sh" \
+    --output "$env_script"
+fi
+bash "$SCRIPT_DIR/generation/env.sh" "$SCRIPT_DIR/.."
+
 repositories=(
   "https://github.com/neupgroup/neup.core|$NEUP_DIR/core|neup.core"
   "https://github.com/neupgroup/neup.logica|$NEUP_DIR/logica|neup.logica"
