@@ -5,7 +5,7 @@ set -Eeuo pipefail
 : <<'NEUP_DOCUMENTATION'
 
 :: Where to keep this file?
-:: Keep this inside the /.neup folder as setup.sh
+:: Clone the guidelines repository into /.neup/setup; this file is nextjs/setup.sh.
 
 ::neup.documentation::setup-script
 
@@ -19,7 +19,7 @@ latest commit on GitHub's `main` branch. Run `npm run setup -- force` (or
 NEUP_DOCUMENTATION
 
 readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-readonly NEUP_DIR="$SCRIPT_DIR"
+readonly NEUP_DIR="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 
 clone_repository() {
   local repository_url="$1"
@@ -71,15 +71,7 @@ done
 
 mkdir -p -- "$NEUP_DIR"
 
-env_script="$SCRIPT_DIR/generation/env.sh"
-if [[ ! -f "$env_script" ]]; then
-  mkdir -p -- "$SCRIPT_DIR/generation"
-  printf 'Downloading generation/env.sh.\n'
-  curl --fail --silent --show-error --location \
-    "https://raw.githubusercontent.com/neupgroup/guidelines/main/nextjs/generation/env.sh" \
-    --output "$env_script"
-fi
-bash "$SCRIPT_DIR/generation/env.sh" "$SCRIPT_DIR/.."
+bash "$SCRIPT_DIR/generation/env.sh" "$NEUP_DIR/.."
 
 repositories=(
   "https://github.com/neupgroup/neup.core|$NEUP_DIR/core|neup.core"
