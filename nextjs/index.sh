@@ -90,3 +90,5 @@ for repository in "${repositories[@]}"; do
     sync_repository "$repository_url" "$target_directory" "$repository_name"
   fi
 done
+
+bash "$SCRIPT_DIR/modules.optimize.sh" "$@"
