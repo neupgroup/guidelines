@@ -5,7 +5,7 @@ set -Eeuo pipefail
 : <<'NEUP_DOCUMENTATION'
 
 :: Where to keep this file?
-:: Clone the guidelines repository into /.neup/setup; this file is nextjs/setup.sh.
+:: Clone the guidelines repository into /.neup/setup; this file is nextjs/index.sh.
 
 ::neup.documentation::setup-script
 
