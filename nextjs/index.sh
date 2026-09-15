@@ -90,9 +90,3 @@ for repository in "${repositories[@]}"; do
     sync_repository "$repository_url" "$target_directory" "$repository_name"
   fi
 done
-
-optimize_url="https://raw.githubusercontent.com/neupgroup/guidelines/main/nextjs/optimize.sh"
-optimize_script="$NEUP_DIR/optimize.sh"
-printf 'Downloading optimize.sh.\n'
-curl --fail --silent --show-error --location "$optimize_url" --output "$optimize_script"
-chmod +x "$optimize_script"
