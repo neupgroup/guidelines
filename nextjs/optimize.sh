@@ -20,6 +20,7 @@ readonly NEUP_DIR="$SCRIPT_DIR"
 # Remove paths created by older setup script versions. Keep the canonical
 # `.neup/domain` repository and all other managed repositories intact.
 for legacy_path in \
+  "$NEUP_DIR/domain" \
   "$NEUP_DIR/core/domain" \
   "$NEUP_DIR/devDomain" \
   "$NEUP_DIR/devdomain.setup"; do

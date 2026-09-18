@@ -104,8 +104,11 @@ repositories=(
   "https://github.com/neupgroup/neup.core|$NEUP_DIR/core|neup.core"
   "https://github.com/neupgroup/neup.logica|$NEUP_DIR/logica|neup.logica"
   "https://github.com/neupgroup/neup.react.components|$NEUP_DIR/components|neup.react.components"
-  "https://github.com/neupgroup/devdomain.setup|$NEUP_DIR/domain|devdomain.setup"
 )
+
+if [[ "$mode" != "optimize" ]]; then
+  repositories+=("https://github.com/neupgroup/devdomain.setup|$NEUP_DIR/domain|devdomain.setup")
+fi
 
 for repository in "${repositories[@]}"; do
   IFS='|' read -r repository_url target_directory repository_name <<< "$repository"
