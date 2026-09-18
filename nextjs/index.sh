@@ -61,17 +61,44 @@ sync_repository() {
   clone_repository "$repository_url" "$target_directory"
 }
 
+mode="install"
 force_sync=false
-for argument in "$@"; do
-  if [[ "$argument" == "force" ]]; then
-    force_sync=true
-    break
-  fi
+while (($#)); do
+  case "$1" in
+    --mode)
+      mode="${2:?Missing value for --mode}"
+      shift 2
+      ;;
+    --mode=*)
+      mode="${1#*=}"
+      shift
+      ;;
+    force)
+      force_sync=true
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
 done
 
-mkdir -p -- "$NEUP_DIR"
+case "$mode" in
+  install)
+    ;;
+  optimize)
+    ;;
+  install-clean|clean-install)
+    force_sync=true
+    ;;
+  *)
+    printf 'Unknown setup mode: %s\n' "$mode" >&2
+    printf 'Expected install, optimize, install-clean, or clean-install.\n' >&2
+    exit 2
+    ;;
+esac
 
-bash "$SCRIPT_DIR/generation/env.sh" "$NEUP_DIR/.."
+mkdir -p -- "$NEUP_DIR"
 
 repositories=(
   "https://github.com/neupgroup/neup.core|$NEUP_DIR/core|neup.core"
@@ -91,4 +118,7 @@ for repository in "${repositories[@]}"; do
   fi
 done
 
-bash "$SCRIPT_DIR/modules.optimize.sh" "$@"
+if [[ "$mode" == "optimize" ]]; then
+  bash "$SCRIPT_DIR/generation/env.sh" "$NEUP_DIR/.."
+  bash "$SCRIPT_DIR/modules.optimize.sh"
+fi

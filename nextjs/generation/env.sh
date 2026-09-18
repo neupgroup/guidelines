@@ -11,7 +11,7 @@ node - "$PROJECT_DIR" <<'NODE'
 const fs = require('fs');
 const path = require('path');
 const projectDir = process.argv[2];
-const baseFile = path.join(projectDir, 'base/application.json');
+const baseFile = path.join(projectDir, '@base/application.json');
 const envFile = path.join(projectDir, '.env');
 
 try {
